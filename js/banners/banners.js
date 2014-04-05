@@ -3,7 +3,7 @@
 			this.container = container;
 			this.slides = this.container.find('ul');
 			this.settings = settings;
-
+			this.slideWidth = parseInt(this.container.outerWidth());
 			this.startX = 0;
 			this.moveX = 0;
 			this.startSlideX = 0;
@@ -13,10 +13,12 @@
 			this.init();
 
 			var inst = this;
-			this.container.find('a.right').click(function() {
+			this.container.find('a.right').click(function(e) {
+				e.preventDefault();
 				inst.move('+');
 			});
-			this.container.find('a.left').click(function() {
+			this.container.find('a.left').click(function(e) {
+				e.preventDefault();
 				inst.move('-');
 			});
 			this.container.bind('touchstart', function(e) {
@@ -32,12 +34,30 @@
 		}
 
 		banner.prototype.init = function() {
+			this.cssify();
+
 			var moveTo = 0;
 			if(this.container.find('ul li.active').size()) {
 				moveTo = this.container.find('ul li.active').index();
 			}
 
 			this.move(moveTo, 0);
+		};
+
+		banner.prototype.cssify = function() {
+			this.container.css({
+				'overflow': 'hidden'
+			});
+			this.slides.css({
+				'width': parseInt(this.slideWidth*this.slides.find('li').length),
+				'list-style-type':'none',
+				'margin':'0px',
+				'padding':'0px'
+			});
+			this.slides.find('li').css({
+				'width':this.slideWidth,
+				'display':'inline-block',
+			});
 		};
 
 		banner.prototype.move = function(position, speed) {
@@ -66,7 +86,7 @@
 			this.slides.find('li:eq('+position+')').addClass('active');
 
 			this.slides.animate({
-				'margin-left':position*300*-1+'px'
+				'margin-left':position*this.slideWidth*-1+'px'
 			}, speed);
 		};
 
@@ -84,7 +104,7 @@
 			var abs = Math.abs(this.moveX);
 
 			var tmpX = parseInt(this.slides.css('margin-left'));
-			var tmpIndex = Math.round(tmpX / 300);
+			var tmpIndex = Math.round(tmpX / this.slideWidth);
 			if(tmpIndex > 0) {
 				tmpIndex = 0;
 			}else{
