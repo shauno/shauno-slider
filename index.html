@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Banner thing</title>
+
+		<style>
+			.banner {
+				width: 300px;
+				overflow: hidden;
+			}
+			.banner ul.slides {
+				padding: 0;
+				margin: 0;
+				list-style-type: none;
+				width: 900px
+			}
+
+			.banner ul.slides li {
+				padding: 0;
+				margin: 0;
+				display: inline-block;
+				width: 300px;
+			}
+
+
+		</style>
+	</head>
+	<body>
+
+		<div class="banner group one">
+			<ul class="slides">
+				<li>One</li><!--
+				--><li>Two</li><!--
+				--><li>Three</li>
+			</ul>
+
+			<a href="#" class="left">&laquo;</a>
+			<a href="#" class="right">&raquo;</a>
+		</div>
+
+		<hr />
+
+		<div class="banner group two">
+			<ul class="slides">
+				<li>One</li><!--
+				--><li class="active">Two</li><!--
+				--><li>Three</li>
+			</ul>
+
+			<a href="#" class="left">&laquo;</a>
+			<a href="#" class="right">&raquo;</a>
+		</div>
+
+		<hr />
+
+		<div id="banner-3" class="banner single three">
+			<ul class="slides">
+				<li>One</li><!--
+				--><li>Two</li><!--
+				--><li>Three</li>
+			</ul>
+
+			<a href="#" class="left">&laquo;</a>
+			<a href="#" class="right">&raquo;</a>
+		</div>
+		
+		<hr />
+		
+		<div id="banner-4" class="banner single four">
+			<ul class="slides">
+				<li>One</li><!--
+				--><li>Two</li><!--
+				--><li class="active">Three</li>
+			</ul>
+
+			<a href="#" class="left">&laquo;</a>
+			<a href="#" class="right">&raquo;</a>
+		</div>
+
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/banners/banners.js"></script>
+		<script>
+			jQuery(document).ready(function() {
+				jQuery('.group').shaunoBanner({
+					speed: 500
+				}).css({'border':'1px dashed black'});
+
+				jQuery('#banner-3').shaunoBanner({
+					speed: 500
+				}).css({'border':'1px dashed black'});
+
+				jQuery('#banner-4').shaunoBanner({
+					speed: 500
+				}).css({'border':'1px dashed black'});
+
+			});
+
+		</script>
+	</body>
+</html>
