@@ -12,11 +12,10 @@
 
 			this.isDown = false;
 
-			instance = this;
-
 			this.init();
 
 			var inst = this;
+
 			this.container.find('a.right').click(function(e) {
 				e.preventDefault();
 				inst.move('+');
@@ -36,18 +35,23 @@
 			});
 			this.container.mousedown(function(e) {
 				e.preventDefault();
-				this.isDown = true;
+				inst.isDown = true;
 				inst.handleTouchStart(e, true);
 			});
 			this.container.mousemove(function(e) {
 				e.preventDefault();
-				if(this.isDown) {
+				if(inst.isDown) {
 					inst.handleTouchMove(e, true);
 				}
 			});
 			this.container.mouseup(function(e) {
 				e.preventDefault();
-				this.isDown = false;
+				inst.isDown = false;
+				inst.handleTouchEnd(e, true);
+			});
+			this.container.mouseleave(function(e) {
+				e.preventDefault();
+				inst.isDown = false;
 				inst.handleTouchEnd(e, true);
 			});
 		}
